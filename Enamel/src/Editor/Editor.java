@@ -2,17 +2,18 @@ package Editor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 public class Editor {
 
@@ -62,18 +63,36 @@ public class Editor {
 			}
 		});
 		
-		openScenarioBtn.setBackground(UIManager.getColor("Button.shadow"));
+		openScenarioBtn.setBackground(Color.ORANGE);
 		panel.add(openScenarioBtn);
 		
 		JButton createScenarioBtn = new JButton("Create Scenario");
-		createScenarioBtn.setBackground(UIManager.getColor("Button.shadow"));
+		createScenarioBtn.setBackground(Color.ORANGE);
 		panel.add(createScenarioBtn);
 		
 		JButton playScenarioBtn = new JButton("Play Scenario");
-		playScenarioBtn.setBackground(UIManager.getColor("Button.shadow"));
+		playScenarioBtn.setBackground(Color.ORANGE);
 		panel.add(playScenarioBtn);
+		
+		// The Help Button that opens up the GitHub repo
+		JButton helpBtn = new JButton("Help");
+		helpBtn.setForeground(new Color(0, 0, 0));
+		helpBtn.setBackground(Color.ORANGE);
+		helpBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				    try {
+				        Desktop.getDesktop().browse(new URL("https://github.com/marlinla/Treasure-Box-Braille").toURI());
+				    } catch (Exception ex) {
+				        ex.printStackTrace();
+				    }
+			}
+		});
+		panel.add(helpBtn);
+		
 		frame.setBounds(100, 100, 650, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
 	}
 
 }
