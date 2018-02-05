@@ -72,7 +72,7 @@ public class Editor {
 		JButton playScenarioBtn = new JButton("Play Scenario");
 		playScenarioBtn.setBackground(UIManager.getColor("Button.shadow"));
 		panel.add(playScenarioBtn);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 650, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
