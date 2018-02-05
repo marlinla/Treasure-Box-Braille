@@ -13,6 +13,5 @@
 	<classpathentry exported="true" kind="lib" path="lib/jsapi.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/assertj-core-3.6.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-io-2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Java/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
