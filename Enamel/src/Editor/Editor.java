@@ -14,6 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class Editor {
 
@@ -48,8 +55,12 @@ public class Editor {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
+		frame.setTitle("The Authoring App");
 		
+		// The panel to add the buttons
 		JPanel panel = new JPanel();
+		panel.setBackground(UIManager.getColor("FormattedTextField.selectionBackground"));
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) SystemColor.desktop));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -63,21 +74,21 @@ public class Editor {
 			}
 		});
 		
-		openScenarioBtn.setBackground(Color.ORANGE);
+		openScenarioBtn.setBackground(Color.WHITE);
 		panel.add(openScenarioBtn);
 		
 		JButton createScenarioBtn = new JButton("Create Scenario");
-		createScenarioBtn.setBackground(Color.ORANGE);
+		createScenarioBtn.setBackground(Color.WHITE);
 		panel.add(createScenarioBtn);
 		
 		JButton playScenarioBtn = new JButton("Play Scenario");
-		playScenarioBtn.setBackground(Color.ORANGE);
+		playScenarioBtn.setBackground(Color.WHITE);
 		panel.add(playScenarioBtn);
 		
 		// The Help Button that opens up the GitHub repo
 		JButton helpBtn = new JButton("Help");
 		helpBtn.setForeground(new Color(0, 0, 0));
-		helpBtn.setBackground(Color.ORANGE);
+		helpBtn.setBackground(Color.WHITE);
 		helpBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				    try {
@@ -89,10 +100,21 @@ public class Editor {
 		});
 		panel.add(helpBtn);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(UIManager.getColor("TextArea.selectionBackground"));
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
+		
+		JLabel welcomeLabel = new JLabel("Welcome to the Authoring App! Click one of the buttons above to start.");
+		welcomeLabel.setForeground(new Color(0, 0, 0));
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
+		welcomeLabel.setBounds(0, 0, 634, 40);
+		panel_1.add(welcomeLabel);
+		
 		frame.setBounds(100, 100, 650, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 	}
-
 }
