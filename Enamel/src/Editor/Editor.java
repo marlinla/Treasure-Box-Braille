@@ -8,7 +8,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,10 +23,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
 
 public class Editor {
 
 	private JFrame frame;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -77,7 +81,7 @@ public class Editor {
 		openScenarioBtn.setBackground(Color.WHITE);
 		panel.add(openScenarioBtn);
 		
-		JButton createScenarioBtn = new JButton("Create Scenario");
+		JButton createScenarioBtn = new JButton("New Scenario");
 		createScenarioBtn.setBackground(Color.WHITE);
 		panel.add(createScenarioBtn);
 		
@@ -100,21 +104,56 @@ public class Editor {
 		});
 		panel.add(helpBtn);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(UIManager.getColor("TextArea.selectionBackground"));
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
+		//welcome panel 
+		JPanel panelWelcome = new JPanel();
+		panelWelcome.setBackground(Color.PINK);
+		frame.getContentPane().add(panelWelcome, BorderLayout.CENTER);
+		panelWelcome.setLayout(null);
 		
 		JLabel welcomeLabel = new JLabel("Welcome to the Authoring App! Click one of the buttons above to start.");
 		welcomeLabel.setForeground(new Color(0, 0, 0));
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
 		welcomeLabel.setBounds(0, 0, 634, 40);
-		panel_1.add(welcomeLabel);
+		panelWelcome.add(welcomeLabel);
+		
+		
+		try {
+			testScenarioScanning(panelWelcome);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		JPanel panelFooter = new JPanel();
+		frame.getContentPane().add(panelFooter, BorderLayout.SOUTH);
+		
 		
 		frame.setBounds(100, 100, 650, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//editor panel
+		
+		
+		
+	}
+
+	private JLabel testScenarioScanning(JPanel panel) throws FileNotFoundException {
+		JLabel textLabel = new JLabel();
+		textLabel.setBounds(10, 76, 614, 71);
+		panel.add(textLabel);
+		//read from scenario 1
+		
+		Scanner scenario_1 = new Scanner(new File("/Enamel/FactoryScenarios/Scenario_1.txt"));
+		while (scenario_1.hasNextLine()) {
+			scenario_1.nextLine();
+			textLabel.
+		}
 		
 	}
 }
