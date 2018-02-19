@@ -16,8 +16,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Label;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
@@ -105,31 +109,20 @@ public class Editor {
 		panel.add(helpBtn);
 		
 		//welcome panel 
-		JPanel panelWelcome = new JPanel();
-		panelWelcome.setBackground(Color.PINK);
-		frame.getContentPane().add(panelWelcome, BorderLayout.CENTER);
-		panelWelcome.setLayout(null);
+		createWelcomePanel(frame);
 		
-		JLabel welcomeLabel = new JLabel("Welcome to the Authoring App! Click one of the buttons above to start.");
-		welcomeLabel.setForeground(new Color(0, 0, 0));
-		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		welcomeLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
-		welcomeLabel.setBounds(0, 0, 634, 40);
-		panelWelcome.add(welcomeLabel);
-		
-		
-		try {
-			testScenarioScanning(panelWelcome);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			testScenarioScanning(panelWelcome);
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 		
 		
 		
 		
-		
+		//for footer menus
 		JPanel panelFooter = new JPanel();
 		frame.getContentPane().add(panelFooter, BorderLayout.SOUTH);
 		
@@ -143,17 +136,32 @@ public class Editor {
 		
 	}
 
-	private JLabel testScenarioScanning(JPanel panel) throws FileNotFoundException {
-		JLabel textLabel = new JLabel();
-		textLabel.setBounds(10, 76, 614, 71);
-		panel.add(textLabel);
+	private void createWelcomePanel(JFrame frame2) {
+		JPanel panelWelcome = new JPanel();
+		panelWelcome.setBackground(Color.PINK);
+		frame.getContentPane().add(panelWelcome, BorderLayout.CENTER);
+		
+		
+		JLabel welcomeLabel = new JLabel("Welcome to the Authoring App! Click one of the buttons above to start.");
+		welcomeLabel.setForeground(new Color(0, 0, 0));
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
+		welcomeLabel.setBounds(0, 0, 634, 40);
+		panelWelcome.add(welcomeLabel);		
+	}
+
+	private void testScenarioScanning(JPanel panel) throws FileNotFoundException {
+		
 		//read from scenario 1
 		
-		Scanner scenario_1 = new Scanner(new File("/Enamel/FactoryScenarios/Scenario_1.txt"));
+		Scanner scenario_1 = new Scanner(new File("./FactoryScenarios/Scenario_1.txt"));
 		while (scenario_1.hasNextLine()) {
-			scenario_1.nextLine();
-			textLabel.
+			JLabel labelkeyPhrase = new JLabel(scenario_1.nextLine());
+			labelkeyPhrase.setBounds(0, 0, 634, 40);
+			//labelkeyPhrase.setVerticalAlignment(JLabel.TOP);
+			panel.add(labelkeyPhrase);
 		}
+		scenario_1.close();
 		
 	}
 }
