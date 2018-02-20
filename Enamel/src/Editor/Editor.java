@@ -30,6 +30,9 @@ import java.awt.event.MouseEvent;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import javax.swing.JLabel;
+import javax.swing.border.MatteBorder;
+import javax.swing.JScrollBar;
+import java.awt.BorderLayout;
 
 public class Editor {
 
@@ -37,11 +40,13 @@ public class Editor {
 	private JOptionPane noFileChosenPopUp; // The small frame that opens up when there is no file chosen
 	private File openScenarioFile = null; // The File that gets chosen by the open Scenario Button
 	private boolean validScenarioFile;
-	// The Initialization of the ribbons
+	// The Initialization of the ribbons and the panels
 	JPanel ribbonFile = new JPanel(); // File Ribbon
 	JPanel ribbonEdit = new JPanel(); // Edit Ribbon
 	JPanel panelHeader = new JPanel(); // The main panel that holds the top most buttons
 	JLabel labelSelectedFile = new JLabel(); // The selected file label that shows what file you selected
+	JPanel panelFooter = new JPanel(); // The footer panel
+	JPanel panelScenarioCreator = new JPanel(); // The scenario creator panel which has all the scenario creator functionality	
 
 	/**
 	 * Launch the application.
@@ -66,13 +71,13 @@ public class Editor {
 		frame = new JFrame();
 		frame.setBackground(Color.WHITE);
 		frame.setTitle("The Authoring App");
-		frame.setBounds(100, 100, 650, 550);
+		frame.setBounds(175, 25, 800, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// This is the header panel that holds the buttons on top of the application
 		panelHeader.setBackground(Color.WHITE);
-		panelHeader.setBounds(0, 0, 634, 26);
+		panelHeader.setBounds(0, 0, 784, 26);
 		frame.getContentPane().add(panelHeader);
 		panelHeader.setLayout(null);
 
@@ -100,7 +105,7 @@ public class Editor {
 				frame.remove(ribbonEdit); // removes existing ribbons first
 
 				ribbonFile.setBackground(SystemColor.activeCaption);
-				ribbonFile.setBounds(0, 26, 634, 36);
+				ribbonFile.setBounds(0, 26, 784, 36);
 				frame.getContentPane().add(ribbonFile);
 
 				addFileRibbonComponents(ribbonFile); // adds all the components to the file ribbon
@@ -139,7 +144,7 @@ public class Editor {
 				frame.remove(ribbonFile); // Removes existing ribbons first
 
 				ribbonEdit.setBackground(SystemColor.activeCaption);
-				ribbonEdit.setBounds(0, 26, 634, 36);
+				ribbonEdit.setBounds(0, 26, 784, 36);
 				frame.getContentPane().add(ribbonEdit);
 
 				addEditRibbonComponents(ribbonEdit); // adds all the components to the Edit ribbon
@@ -190,6 +195,23 @@ public class Editor {
 		btnHelp.setBackground(Color.WHITE);
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
+		
+		//############################ WORKING WITH MARLIN ###########################//
+		panelFooter.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));
+		panelFooter.setLayout(null);
+		panelFooter.setBackground(Color.WHITE);
+		panelFooter.setBounds(0, 635, 788, 24);
+		frame.getContentPane().add(panelFooter);
+		
+		panelScenarioCreator.setBounds(0, 26, 784, 609);
+		frame.getContentPane().add(panelScenarioCreator);
+		panelScenarioCreator.setLayout(null);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(767, 36, 17, 573);
+		scrollBar.setForeground(Color.LIGHT_GRAY);
+		scrollBar.setBackground(Color.ORANGE);
+		panelScenarioCreator.add(scrollBar);
 
 		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
 		// new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit,
@@ -322,7 +344,7 @@ public class Editor {
 		// The JLabel to hold the selected file
 		labelSelectedFile.setText("Selected File:  '" + file.getName() + "'  ");
 		labelSelectedFile.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelSelectedFile.setBounds(338, 0, 216, 26);
+		labelSelectedFile.setBounds(489, 0, 216, 26);
 		panelHeader.add(labelSelectedFile);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
@@ -341,7 +363,7 @@ public class Editor {
 		btnRemove.getAccessibleContext().setAccessibleDescription("The remove button removes the file that you just selected");
 		btnRemove.setBackground(Color.RED);
 		btnRemove.setForeground(Color.WHITE);
-		btnRemove.setBounds(554, 0, 80, 26);
+		btnRemove.setBounds(705, 0, 80, 26);
 		panelHeader.add(btnRemove);
 
 		panelHeader.revalidate();
@@ -432,5 +454,4 @@ public class Editor {
 			e.printStackTrace();
 		}
 	}
-
 }
