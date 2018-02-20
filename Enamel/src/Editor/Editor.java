@@ -107,6 +107,9 @@ public class Editor {
 			}
 		});
 
+		btnFile.getAccessibleContext().setAccessibleDescription(
+				"The File button opens up the file tab that lets you open, create or edit scenario files. Button 1 of 3");
+		btnFile.setToolTipText("Open, create or play scenario files");
 		btnFile.setBorderPainted(false);
 		btnFile.setBackground(Color.WHITE);
 		btnFile.setBounds(0, 0, 65, 26);
@@ -144,6 +147,9 @@ public class Editor {
 			}
 		});
 
+		btnEdit.getAccessibleContext().setAccessibleDescription(
+				"The Edit button opens up the edit tab that lets you edit already saved scenarios. Button 2 of 3");
+		btnEdit.setToolTipText("Edit scenario files");
 		btnEdit.setBorderPainted(false);
 		btnEdit.setBackground(Color.WHITE);
 		btnEdit.setBounds(64, 0, 65, 26);
@@ -177,15 +183,19 @@ public class Editor {
 			}
 		});
 
+		btnHelp.getAccessibleContext()
+				.setAccessibleDescription("The Help Button opens up the user manual. Button 3 of 3");
+		btnHelp.setToolTipText("Opens up the User Manual");
 		btnHelp.setBorderPainted(false);
 		btnHelp.setBackground(Color.WHITE);
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
-		
-//		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
-//				new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit, btnHelp }));
+
+		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
+		// new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit,
+		// btnHelp }));
 	}
-	
+
 	/**
 	 * Sets the color of the JButton to orange and its text to white on mouse hover
 	 * 
@@ -222,11 +232,18 @@ public class Editor {
 				openTheScenarioFile(btnOpenScenario);
 			}
 		});
+		btnOpenScenario.getAccessibleContext()
+				.setAccessibleDescription("The Open scenario button lets you select a scenario file to play. Button 1 of 3");
+		btnOpenScenario.setToolTipText("Select a scenario file to open");
 		btnOpenScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnOpenScenario);
 
 		// This is the Create Scenario Button inside of the file ribbon
 		JButton btnCreateScenario = new JButton("Create Scenario");
+
+		btnCreateScenario.setToolTipText("Opens the scenario file creator");
+		btnCreateScenario.getAccessibleContext()
+				.setAccessibleDescription("Create scenario helps you create a scenario file. Button 2 of 3");
 		btnCreateScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnCreateScenario);
 
@@ -238,9 +255,14 @@ public class Editor {
 				playScenario();
 			}
 		});
+
+		btnPlayScenario.getAccessibleContext().setAccessibleDescription("Plays the scenario file that you selected");
+		btnPlayScenario.setToolTipText("The play scenario button plays the Scenario File that you selected");
 		btnPlayScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnPlayScenario);
-
+		// Accessibility description for the file ribbon
+		ribbonFile.getAccessibleContext().setAccessibleDescription(
+				"This is the tab for the file button. There are 3 buttons and they are Open Scenario, Create Scenario and Play Scenario.");
 		// Revalidating and Repainting so it shows up
 		ribbonFile.revalidate();
 		ribbonFile.repaint();
@@ -253,10 +275,16 @@ public class Editor {
 	 *            the Edit Ribbon
 	 */
 	private void addEditRibbonComponents(JPanel ribbonEdit) {
-		JButton btnNewButton = new JButton("Edit Scenario");
-		btnNewButton.setBackground(Color.ORANGE);
-		ribbonEdit.add(btnNewButton);
+		JButton btnEditScenario = new JButton("Edit Scenario");
 
+		btnEditScenario.getAccessibleContext()
+				.setAccessibleDescription("The edit scenario button Edits an already saved scenario. Button 1 of 1");
+		btnEditScenario.setToolTipText("Edits already saved scenario files");
+		btnEditScenario.setBackground(Color.ORANGE);
+		ribbonEdit.add(btnEditScenario);
+		// Accessibility description for the edit ribbon
+		ribbonEdit.getAccessibleContext().setAccessibleDescription(
+				"This is the tab for the edit button. There is only one button and it is the edit scenario button");
 		ribbonEdit.revalidate();
 		ribbonEdit.repaint();
 	}
@@ -278,14 +306,15 @@ public class Editor {
 			createFileDisplayer(panelHeader, openScenarioFile);
 		}
 	}
-	
+
 	/**
-	 * Creates the file displayer that shows what file the user selected and also adds 
-	 * a remove button to remove the current selection
+	 * Creates the file displayer that shows what file the user selected and also
+	 * adds a remove button to remove the current selection
+	 * 
 	 * @param panelHeader
-	 * 					the panel to add the JLabel and Remove button to
+	 *            the panel to add the JLabel and Remove button to
 	 * @param file
-	 * 				the file to add to the displayer
+	 *            the file to add to the displayer
 	 */
 	private void createFileDisplayer(JPanel panelHeader, File file) {
 		// Remove existing file displayers first
@@ -303,11 +332,13 @@ public class Editor {
 				panelHeader.remove(labelSelectedFile);
 				panelHeader.remove(btnRemove);
 				openScenarioFile = null;
-				
+
 				panelHeader.revalidate();
 				panelHeader.repaint();
 			}
 		});
+		
+		btnRemove.getAccessibleContext().setAccessibleDescription("The remove button removes the file that you just selected");
 		btnRemove.setBackground(Color.RED);
 		btnRemove.setForeground(Color.WHITE);
 		btnRemove.setBounds(554, 0, 80, 26);
