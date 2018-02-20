@@ -27,7 +27,7 @@ import enamel.ScenarioParser;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
+//import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import javax.swing.JLabel;
 
@@ -182,8 +182,29 @@ public class Editor {
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
 		
-		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
-				new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit, btnHelp }));
+//		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
+//				new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit, btnHelp }));
+	}
+	
+	/**
+	 * Sets the color of the JButton to orange and its text to white on mouse hover
+	 * 
+	 * @param btn
+	 */
+	private void setOnMouseEnteredColor(JButton btn) {
+		btn.setForeground(Color.WHITE);
+		btn.setBackground(Color.ORANGE);
+	}
+
+	/**
+	 * Sets the color of the JButton to white and its text to black on mouse hover
+	 * exit
+	 * 
+	 * @param btn
+	 */
+	private void setOnMouseExitColor(JButton btn) {
+		btn.setBackground(Color.WHITE);
+		btn.setForeground(Color.BLACK);
 	}
 
 	/**
@@ -238,27 +259,6 @@ public class Editor {
 
 		ribbonEdit.revalidate();
 		ribbonEdit.repaint();
-	}
-
-	/**
-	 * Sets the color of the JButton to orange and its text to white on mouse hover
-	 * 
-	 * @param btn
-	 */
-	private void setOnMouseEnteredColor(JButton btn) {
-		btn.setForeground(Color.WHITE);
-		btn.setBackground(Color.ORANGE);
-	}
-
-	/**
-	 * Sets the color of the JButton to white and its text to black on mouse hover
-	 * exit
-	 * 
-	 * @param btn
-	 */
-	private void setOnMouseExitColor(JButton btn) {
-		btn.setBackground(Color.WHITE);
-		btn.setForeground(Color.BLACK);
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class Editor {
 	 * handles errors when there is no file chosen or if the file is not valid
 	 */
 	private void playScenario() {
-		// Checks if the user has selected a file or not
+		// If the user doesn't have a file chosen
 		if (openScenarioFile == null) {
 			noFileChosenPopUp = new JOptionPane();
 			noFileChosenPopUp.setBounds(300, 300, 250, 125);
