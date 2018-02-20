@@ -27,7 +27,7 @@ import enamel.ScenarioParser;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
+//import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import javax.swing.JLabel;
 
@@ -182,8 +182,8 @@ public class Editor {
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
 		
-		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
-				new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit, btnHelp }));
+//		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
+//				new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit, btnHelp }));
 	}
 
 	/**
