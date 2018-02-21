@@ -66,7 +66,6 @@ public class KeyPhraseTemplate extends JPanel {
 		rightButtonGroup.add(btnMoveUp);
 
 		JButton btnMoveDown = new JButton("Move Down");
-		btnMoveDown.setHorizontalAlignment(SwingConstants.LEFT);
 		rightButtonGroup.add(btnMoveDown);
 
 		JButton btnInsert = new JButton("Insert Below");
@@ -95,17 +94,14 @@ public class KeyPhraseTemplate extends JPanel {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblKeyPhraseTemplate)
-						.addComponent(lblTextLine, GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
-					.addGap(38)
+						.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, 587, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(2)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnDelete, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnMoveUp, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnInsert)
-								.addComponent(btnMoveDown, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(btnInsertAbove))
+						.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnInsertAbove, 0, 0, Short.MAX_VALUE)
+						.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(btnInsert, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -126,8 +122,9 @@ public class KeyPhraseTemplate extends JPanel {
 							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-							.addGap(18)
-							.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+							.addGap(2)))
 					.addGap(38))
 		);
 		setLayout(groupLayout);
