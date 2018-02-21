@@ -3,6 +3,8 @@ package Editor;
 import java.awt.LayoutManager;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -12,6 +14,8 @@ import Editor.templates.KeyPhraseTemplate;
 
 public class PanelEditor extends JPanel {
 
+	List<KeyPhraseTemplate> listTemplates = new ArrayList<>();
+	
 	public PanelEditor(File file) throws FileNotFoundException {
 		super();
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -21,9 +25,8 @@ public class PanelEditor extends JPanel {
 		while (scenario.hasNextLine()) {
 			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
 			this.add(temp);
+			listTemplates.add(temp);
 		}
-		this.revalidate();
-		this.repaint();
 	}
 
 	public PanelEditor(LayoutManager layout) {
