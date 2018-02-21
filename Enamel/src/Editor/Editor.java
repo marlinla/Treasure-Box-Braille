@@ -1,6 +1,7 @@
 package Editor;
 
 import java.awt.Color;
+
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -31,16 +32,12 @@ import java.awt.event.MouseEvent;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
 
 public class Editor {
 
 	private JFrame frame;
-	private JOptionPane noFileChosenPopUp; // The small frame that opens up when there is no file chosen
 	private File openScenarioFile = null; // The File that gets chosen by the open Scenario Button
 	private boolean validScenarioFile;
 	// The Initialization of the ribbons and the panels
@@ -49,8 +46,8 @@ public class Editor {
 	JPanel panelHeader = new JPanel(); // The main panel that holds the top most buttons
 	JLabel labelSelectedFile = new JLabel(); // The selected file label that shows what file you selected
 	JPanel panelFooter = new JPanel(); // The footer panel
-	JScrollPane scrollScenarioEditor = new JScrollPane(); // The scenario creator panel which has all the scenario creator
-	private final JPanel panelScenarioEditor = new JPanel();
+	JScrollPane scrollScenarioEditor = new JScrollPane(); // The scroll pane to hold the scenario editor
+	JPanel panelScenarioEditor = new JPanel(); // the panel to hold all the edit templates
 	
 
 	/**
@@ -199,12 +196,14 @@ public class Editor {
 		btnHelp.setBackground(Color.WHITE);
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
+		
 		// The Panel footer
 		panelFooter.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		panelFooter.setLayout(null);
 		panelFooter.setBackground(Color.WHITE);
 		panelFooter.setBounds(0, 635, 788, 24);
 		frame.getContentPane().add(panelFooter);
+	
 		
 		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
 		// new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit,
@@ -342,7 +341,7 @@ public class Editor {
 	 *            the file to add to the displayer
 	 */
 	private void createFileDisplayer(JPanel panelHeader, File file) {
-		// Remove existing file displayers first
+		// Remove existing file displayer first
 		panelHeader.remove(labelSelectedFile);
 		// The JLabel to hold the selected file
 		labelSelectedFile.setText("Selected File:  '" + file.getName() + "'  ");
@@ -374,33 +373,32 @@ public class Editor {
 		panelHeader.revalidate();
 		panelHeader.repaint();
 	}
-
+	
+	/**
+	 * Generates all the templates when the edit scenario button is placed
+	 * @throws FileNotFoundException
+	 */
 	private void editScenario() throws FileNotFoundException {
 		// If the user doesn't have a file chosen
 		if (openScenarioFile == null) {
-			noFileChosenPopUp = new JOptionPane();
-			noFileChosenPopUp.setBounds(300, 300, 250, 125);
-			noFileChosenPopUp.showMessageDialog(frame,
+			JOptionPane.showMessageDialog(frame,
 					"No scenario file chosen. Please select"
 							+ " a scenario file \nby clicking on the open scenario button in the file menu.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			noFileChosenPopUp.setVisible(true);
 			return;
 		}
 
 		isScenarioFile(); // Checks if it is a scenarioFile
 
 		if (!validScenarioFile) {
-			noFileChosenPopUp = new JOptionPane();
-			noFileChosenPopUp.setBounds(300, 300, 250, 125);
-			noFileChosenPopUp.showMessageDialog(frame,
+			JOptionPane.showMessageDialog(frame,
 					"'" + openScenarioFile.getName() + "'"
 							+ " is an invalid scenario File. Please select a valid scenario file.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			noFileChosenPopUp.setVisible(true);
 			return;
 		}
-
+		
+		// Initializes the editor through the scroll pane
 		scrollScenarioEditor.setBounds(0, 63, 784, 572);
 		scrollScenarioEditor.setBorder(null);
 		frame.getContentPane().add(scrollScenarioEditor);
@@ -426,25 +424,19 @@ public class Editor {
 	private void playScenario() {
 		// If the user doesn't have a file chosen
 		if (openScenarioFile == null) {
-			noFileChosenPopUp = new JOptionPane();
-			noFileChosenPopUp.setBounds(300, 300, 250, 125);
-			noFileChosenPopUp.showMessageDialog(frame, "No scenario file chosen. Please select"
+			JOptionPane.showMessageDialog(frame, "No scenario file chosen. Please select"
 					+ " a scenario file by clicking on the \nopen scenario button or create a new scenario to play from the file menu.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			noFileChosenPopUp.setVisible(true);
 			return;
 		}
 
 		isScenarioFile(); // Checks if it is a scenarioFile
 
 		if (!validScenarioFile) {
-			noFileChosenPopUp = new JOptionPane();
-			noFileChosenPopUp.setBounds(300, 300, 250, 125);
-			noFileChosenPopUp.showMessageDialog(frame,
+			JOptionPane.showMessageDialog(frame,
 					"'" + openScenarioFile.getName() + "'"
 							+ " is an invalid scenario File. Please select a valid scenario file.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			noFileChosenPopUp.setVisible(true);
 			return;
 		}
 		// This is where the file gets passed into the sound player
