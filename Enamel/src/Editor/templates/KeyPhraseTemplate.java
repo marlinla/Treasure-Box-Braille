@@ -1,4 +1,4 @@
-package Editor;
+package Editor.templates;
 
 import java.awt.LayoutManager;
 
@@ -30,12 +30,15 @@ public class KeyPhraseTemplate extends JPanel {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		
 		JButton btnMoveUp = new JButton("Move Up");
+		btnMoveUp.setBackground(Color.ORANGE);
 		buttonTopRight.add(btnMoveUp);
 		
 		JButton btnMoveDown = new JButton("Move Down");
+		btnMoveDown.setBackground(Color.ORANGE);
 		buttonBottomRight.add(btnMoveDown);
 		
 		JButton btnInsert = new JButton("Insert Below");
+		btnInsert.setBackground(Color.ORANGE);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -43,6 +46,7 @@ public class KeyPhraseTemplate extends JPanel {
 		buttonBottomLeft.add(btnInsert);
 		
 		JButton btnDelete = new JButton("Insert Above");
+		btnDelete.setBackground(Color.ORANGE);
 		buttonBottomLeft.add(btnDelete);
 		
 		JLabel lblKeyPhraseTemplate = createJLabel("Key Phrase Template");
@@ -53,6 +57,7 @@ public class KeyPhraseTemplate extends JPanel {
 		lblTextLine.setAlignmentY(CENTER_ALIGNMENT);
 		
 		JButton btnDelete_1 = new JButton("Delete");
+		btnDelete_1.setBackground(Color.ORANGE);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
