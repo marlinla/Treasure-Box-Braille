@@ -24,11 +24,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class KeyPhraseTemplate extends JPanel {
-	private final ButtonGroup buttonTopRight = new ButtonGroup();
-	private final ButtonGroup buttonBottomLeft = new ButtonGroup();
-	private final ButtonGroup buttonBottomRight = new ButtonGroup();
+	
 
 	private List<JTextField> textFieldList = new ArrayList<>();
 	private final ButtonGroup rightButtonGroup = new ButtonGroup();
@@ -57,9 +58,15 @@ public class KeyPhraseTemplate extends JPanel {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 
 		JButton btnMoveUp = new JButton("Move Up");
+		btnMoveUp.setPreferredSize(new Dimension(150, 40));
+		btnMoveUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		rightButtonGroup.add(btnMoveUp);
 
 		JButton btnMoveDown = new JButton("Move Down");
+		btnMoveDown.setHorizontalAlignment(SwingConstants.LEFT);
 		rightButtonGroup.add(btnMoveDown);
 
 		JButton btnInsert = new JButton("Insert Below");
@@ -74,47 +81,55 @@ public class KeyPhraseTemplate extends JPanel {
 
 		JLabel lblKeyPhraseTemplate = createJLabel("Key Phrase Template");
 
-		JTextField lblTextLine = new JTextField(line);
-		lblTextLine.setHorizontalAlignment(SwingConstants.LEFT);
+		JTextArea lblTextLine = new JTextArea(line);
+		lblTextLine.setFont(new Font("Monospaced", Font.PLAIN, 24));
 		lblTextLine.setAlignmentX(CENTER_ALIGNMENT);
 		lblTextLine.setAlignmentY(CENTER_ALIGNMENT);
 
 		JButton btnDelete = new JButton("Delete");
 		rightButtonGroup.add(btnDelete);
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-						groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-										.addComponent(lblKeyPhraseTemplate))
-								.addGroup(groupLayout.createSequentialGroup().addGap(188).addComponent(lblTextLine,
-										GroupLayout.PREFERRED_SIZE, 486, GroupLayout.PREFERRED_SIZE)))
-								.addGap(20)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-										.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-										.addComponent(btnInsert, GroupLayout.PREFERRED_SIZE, 193, Short.MAX_VALUE)
-										.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
-								.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblKeyPhraseTemplate)
-						.addGap(54)
-						.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(117, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout
-						.createSequentialGroup().addGap(16)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblKeyPhraseTemplate)
+						.addComponent(lblTextLine, GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
+					.addGap(38)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 35, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE).addGap(16))
-						.addGroup(groupLayout.createSequentialGroup().addGap(2).addComponent(btnDelete,
-								GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnMoveDown, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE).addGap(10)));
+							.addGap(2)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnDelete, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnMoveUp, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnInsert)
+								.addComponent(btnMoveDown, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(btnInsertAbove))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblKeyPhraseTemplate)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblTextLine, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(37)
+							.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+							.addGap(18)
+							.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+					.addGap(38))
+		);
 		setLayout(groupLayout);
 		// TODO Auto-generated constructor stub
 
