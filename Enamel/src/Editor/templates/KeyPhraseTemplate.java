@@ -3,27 +3,43 @@ package Editor.templates;
 import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Component;
 
 public class KeyPhraseTemplate extends JPanel {
 	private final ButtonGroup buttonTopRight = new ButtonGroup();
 	private final ButtonGroup buttonBottomLeft = new ButtonGroup();
 	private final ButtonGroup buttonBottomRight = new ButtonGroup();
+	
+	private List<JTextField> textFieldList = new ArrayList<>();
 
 	
 	public KeyPhraseTemplate() {
 		this("Text Line");
 	}
 	
+	public String getText(int index) {
+		return textFieldList.get(index).getText();
+	}
+	public void setText(int index, String text) {
+		textFieldList.get(index).setText(text);
+	}
+	
 	public KeyPhraseTemplate(String line) {
+		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		
 		JButton btnMoveUp = new JButton("Move Up");
 		buttonTopRight.add(btnMoveUp);
@@ -43,8 +59,10 @@ public class KeyPhraseTemplate extends JPanel {
 		
 		JLabel lblKeyPhraseTemplate = createJLabel("Key Phrase Template");
 		
-		JLabel lblTextLine = new JLabel(line);
-		lblTextLine.setHorizontalAlignment(SwingConstants.CENTER);
+		JTextField lblTextLine = new JTextField(line);
+		lblTextLine.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTextLine.setAlignmentX(CENTER_ALIGNMENT);
+		lblTextLine.setAlignmentY(CENTER_ALIGNMENT);
 		
 		JButton btnDelete_1 = new JButton("Delete");
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -54,22 +72,21 @@ public class KeyPhraseTemplate extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblKeyPhraseTemplate)
-									.addPreferredGap(ComponentPlacement.RELATED, 461, Short.MAX_VALUE)
-									.addComponent(btnMoveUp))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(btnInsert)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnDelete)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnDelete_1)
-									.addPreferredGap(ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
-									.addComponent(btnMoveDown))))
+									.addComponent(btnDelete_1))
+								.addComponent(lblKeyPhraseTemplate))
+							.addPreferredGap(ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnMoveUp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(367)
-							.addComponent(lblTextLine)))
+							.addGap(188)
+							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, 524, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -77,11 +94,12 @@ public class KeyPhraseTemplate extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnMoveUp)
-						.addComponent(lblKeyPhraseTemplate))
-					.addGap(68)
-					.addComponent(lblTextLine)
-					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblKeyPhraseTemplate)
+							.addGap(54)
+							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnMoveUp))
+					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnMoveDown)
 						.addComponent(btnInsert)
@@ -112,7 +130,7 @@ public class KeyPhraseTemplate extends JPanel {
 	 * @wbp.factory
 	 * @wbp.factory.parameter.source text "Key Phrase Template"
 	 */
-	public static JLabel createJLabel(String text) {
+	private static JLabel createJLabel(String text) {
 		JLabel label = new JLabel(text);
 		return label;
 	}
