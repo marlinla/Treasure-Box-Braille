@@ -19,20 +19,24 @@ public class FrameApp extends JFrame {
 	public static void main(String[] args) throws FileNotFoundException {
 		//set up a frame to test scanning
 		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel);
+		//JPanel panel = new JPanel();
+		//frame.getContentPane().add(panel);
 		frame.setBounds(0, 0, 1024, 1024);
-		panel.setBackground(new Color(120, 0, 0));
+		//panel.setBackground(new Color(120, 0, 0));
 		frame.setVisible(true);
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		//panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		
 		//scan scenario files and test if they load
-		Scanner scenario = new Scanner(new File("./FactoryScenarios/Scenario_1.txt"));
-		while (scenario.hasNextLine()) {
-			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
-			panel.add(temp);
-		}
-		panel.revalidate();
-		panel.repaint();
+		PanelEditor pe = new PanelEditor(new File("./FactoryScenarios/Scenario_1.txt"));
+		frame.getContentPane().add(pe);
+		frame.revalidate();
+		frame.repaint();
+//		Scanner scenario = new Scanner());
+//		while (scenario.hasNextLine()) {
+//			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
+//			panel.add(temp);
+//		}
+//		panel.revalidate();
+//		panel.repaint();
 	}
 }

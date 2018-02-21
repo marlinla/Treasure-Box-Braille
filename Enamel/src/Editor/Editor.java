@@ -47,8 +47,7 @@ public class Editor {
 	JLabel labelSelectedFile = new JLabel(); // The selected file label that shows what file you selected
 	JPanel panelFooter = new JPanel(); // The footer panel
 	JScrollPane scrollScenarioEditor = new JScrollPane(); // The scroll pane to hold the scenario editor
-	JPanel panelScenarioEditor = new JPanel(); // the panel to hold all the edit templates
-	
+	PanelEditor panelScenarioEditor; // the panel to hold all the edit template
 
 	/**
 	 * Launch the application.
@@ -196,15 +195,14 @@ public class Editor {
 		btnHelp.setBackground(Color.WHITE);
 		btnHelp.setBounds(128, 0, 65, 26);
 		panelHeader.add(btnHelp);
-		
+
 		// The Panel footer
 		panelFooter.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		panelFooter.setLayout(null);
 		panelFooter.setBackground(Color.WHITE);
 		panelFooter.setBounds(0, 635, 788, 24);
 		frame.getContentPane().add(panelFooter);
-	
-		
+
 		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
 		// new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit,
 		// btnHelp }));
@@ -373,9 +371,10 @@ public class Editor {
 		panelHeader.revalidate();
 		panelHeader.repaint();
 	}
-	
+
 	/**
 	 * Generates all the templates when the edit scenario button is placed
+	 * 
 	 * @throws FileNotFoundException
 	 */
 	private void editScenario() throws FileNotFoundException {
@@ -403,15 +402,10 @@ public class Editor {
 		scrollScenarioEditor.setBorder(null);
 		frame.getContentPane().add(scrollScenarioEditor);
 		
+		// The Panel Editor creates the panels
+		PanelEditor panelScenarioEditor = new PanelEditor(openScenarioFile);
 		scrollScenarioEditor.setViewportView(panelScenarioEditor);
-		panelScenarioEditor.setLayout(new BoxLayout(panelScenarioEditor, BoxLayout.Y_AXIS));
-		Scanner scenario = new Scanner(openScenarioFile);
-		while (scenario.hasNextLine()) {
-			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
-			panelScenarioEditor.add(temp);
-			panelScenarioEditor.revalidate();
-			panelScenarioEditor.repaint();
-		}
+		
 		scrollScenarioEditor.revalidate();
 		scrollScenarioEditor.repaint();
 

@@ -20,6 +20,8 @@ public class PanelEditor extends JPanel {
 			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
 			this.add(temp);
 		}
+		this.revalidate();
+		this.repaint();
 	}
 
 	public PanelEditor(LayoutManager layout) {
