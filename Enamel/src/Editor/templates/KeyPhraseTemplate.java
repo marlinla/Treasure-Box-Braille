@@ -29,93 +29,95 @@ public class KeyPhraseTemplate extends JPanel {
 	private final ButtonGroup buttonTopRight = new ButtonGroup();
 	private final ButtonGroup buttonBottomLeft = new ButtonGroup();
 	private final ButtonGroup buttonBottomRight = new ButtonGroup();
-	
-	private List<JTextField> textFieldList = new ArrayList<>();
 
-	
+	private List<JTextField> textFieldList = new ArrayList<>();
+	private final ButtonGroup rightButtonGroup = new ButtonGroup();
+	private int templateID;
+
+	private static int templateCounter;
+
 	public KeyPhraseTemplate() {
 		this("Text Line");
 	}
-	
+
 	public String getText(int index) {
 		return textFieldList.get(index).getText();
 	}
+
 	public void setText(int index, String text) {
 		textFieldList.get(index).setText(text);
 	}
-	
+
+	public int getID() {
+		return this.templateID;
+	}
+
 	public KeyPhraseTemplate(String line) {
+		templateID = templateCounter++;
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		
+
 		JButton btnMoveUp = new JButton("Move Up");
-		buttonTopRight.add(btnMoveUp);
-		
+		rightButtonGroup.add(btnMoveUp);
+
 		JButton btnMoveDown = new JButton("Move Down");
-		buttonBottomRight.add(btnMoveDown);
-		
+		rightButtonGroup.add(btnMoveDown);
+
 		JButton btnInsert = new JButton("Insert Below");
+		rightButtonGroup.add(btnInsert);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		buttonBottomLeft.add(btnInsert);
-		
-		JButton btnDelete = new JButton("Insert Above");
-		buttonBottomLeft.add(btnDelete);
-		
+
+		JButton btnInsertAbove = new JButton("Insert Above");
+		rightButtonGroup.add(btnInsertAbove);
+
 		JLabel lblKeyPhraseTemplate = createJLabel("Key Phrase Template");
-		
+
 		JTextField lblTextLine = new JTextField(line);
 		lblTextLine.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTextLine.setAlignmentX(CENTER_ALIGNMENT);
 		lblTextLine.setAlignmentY(CENTER_ALIGNMENT);
-		
-		JButton btnDelete_1 = new JButton("Delete");
+
+		JButton btnDelete = new JButton("Delete");
+		rightButtonGroup.add(btnDelete);
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+						groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+										.addComponent(lblKeyPhraseTemplate))
+								.addGroup(groupLayout.createSequentialGroup().addGap(188).addComponent(lblTextLine,
+										GroupLayout.PREFERRED_SIZE, 486, GroupLayout.PREFERRED_SIZE)))
+								.addGap(20)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+										.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+										.addComponent(btnInsert, GroupLayout.PREFERRED_SIZE, 193, Short.MAX_VALUE)
+										.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+								.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblKeyPhraseTemplate)
+						.addGap(54)
+						.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(117, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout
+						.createSequentialGroup().addGap(16)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnInsert)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnDelete)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnDelete_1))
-								.addComponent(lblKeyPhraseTemplate))
-							.addPreferredGap(ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnMoveUp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(188)
-							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, 524, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblKeyPhraseTemplate)
-							.addGap(54)
-							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnMoveUp))
-					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnMoveDown)
-						.addComponent(btnInsert)
-						.addComponent(btnDelete)
-						.addComponent(btnDelete_1))
-					.addContainerGap())
-		);
+								.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 35, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE).addGap(16))
+						.addGroup(groupLayout.createSequentialGroup().addGap(2).addComponent(btnDelete,
+								GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnMoveDown, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE).addGap(10)));
 		setLayout(groupLayout);
 		// TODO Auto-generated constructor stub
-		
+
 	}
 
 	public KeyPhraseTemplate(LayoutManager layout) {
@@ -132,6 +134,7 @@ public class KeyPhraseTemplate extends JPanel {
 		super(layout, isDoubleBuffered);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * @wbp.factory
 	 * @wbp.factory.parameter.source text "Key Phrase Template"
