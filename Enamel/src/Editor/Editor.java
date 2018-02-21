@@ -33,6 +33,9 @@ import java.awt.event.MouseEvent;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
+
+import Editor.templates.PanelEditor;
+
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
 
