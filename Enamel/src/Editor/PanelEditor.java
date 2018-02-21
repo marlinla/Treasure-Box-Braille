@@ -8,6 +8,8 @@ import java.util.Scanner;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Editor.templates.KeyPhraseTemplate;
+
 public class PanelEditor extends JPanel {
 
 	public PanelEditor(File file) throws FileNotFoundException {

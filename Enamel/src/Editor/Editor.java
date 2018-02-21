@@ -16,7 +16,6 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -34,7 +33,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
 import javax.swing.JScrollPane;
-import javax.swing.BoxLayout;
+
 
 public class Editor {
 
