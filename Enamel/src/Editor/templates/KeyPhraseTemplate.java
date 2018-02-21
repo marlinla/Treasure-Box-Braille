@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
@@ -124,6 +125,129 @@ public class KeyPhraseTemplate extends JPanel {
 	 * @wbp.factory.parameter.source text "Key Phrase Template"
 	 */
 	public static JLabel createJLabel(String text) {
+=======
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Component;
+
+public class KeyPhraseTemplate extends JPanel {
+	private final ButtonGroup buttonTopRight = new ButtonGroup();
+	private final ButtonGroup buttonBottomLeft = new ButtonGroup();
+	private final ButtonGroup buttonBottomRight = new ButtonGroup();
+	
+	private List<JTextField> textFieldList = new ArrayList<>();
+
+	
+	public KeyPhraseTemplate() {
+		this("Text Line");
+	}
+	
+	public String getText(int index) {
+		return textFieldList.get(index).getText();
+	}
+	public void setText(int index, String text) {
+		textFieldList.get(index).setText(text);
+	}
+	
+	public KeyPhraseTemplate(String line) {
+		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		
+		JButton btnMoveUp = new JButton("Move Up");
+		buttonTopRight.add(btnMoveUp);
+		
+		JButton btnMoveDown = new JButton("Move Down");
+		buttonBottomRight.add(btnMoveDown);
+		
+		JButton btnInsert = new JButton("Insert Below");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		buttonBottomLeft.add(btnInsert);
+		
+		JButton btnDelete = new JButton("Insert Above");
+		buttonBottomLeft.add(btnDelete);
+		
+		JLabel lblKeyPhraseTemplate = createJLabel("Key Phrase Template");
+		
+		JTextField lblTextLine = new JTextField(line);
+		lblTextLine.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTextLine.setAlignmentX(CENTER_ALIGNMENT);
+		lblTextLine.setAlignmentY(CENTER_ALIGNMENT);
+		
+		JButton btnDelete_1 = new JButton("Delete");
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnInsert)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnDelete)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnDelete_1))
+								.addComponent(lblKeyPhraseTemplate))
+							.addPreferredGap(ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnMoveUp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(188)
+							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, 524, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblKeyPhraseTemplate)
+							.addGap(54)
+							.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnMoveUp))
+					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnMoveDown)
+						.addComponent(btnInsert)
+						.addComponent(btnDelete)
+						.addComponent(btnDelete_1))
+					.addContainerGap())
+		);
+		setLayout(groupLayout);
+		// TODO Auto-generated constructor stub
+		
+	}
+
+	public KeyPhraseTemplate(LayoutManager layout) {
+		super(layout);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KeyPhraseTemplate(boolean isDoubleBuffered) {
+		super(isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KeyPhraseTemplate(LayoutManager layout, boolean isDoubleBuffered) {
+		super(layout, isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @wbp.factory
+	 * @wbp.factory.parameter.source text "Key Phrase Template"
+	 */
+	private static JLabel createJLabel(String text) {
+>>>>>>> branch 'master' of https://github.com/marlinla/Treasure-Box-Braille.git
 		JLabel label = new JLabel(text);
 		return label;
 	}

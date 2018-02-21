@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Editor.templates.PanelEditor;
+
 public class FrameApp extends JFrame {
 
 	public static void main(String[] args) throws FileNotFoundException {
