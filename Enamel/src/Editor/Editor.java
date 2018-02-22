@@ -400,6 +400,7 @@ public class Editor {
 		// Initializes the editor through the scroll pane
 		scrollScenarioEditor.setBounds(0, 63, 784, 572);
 		scrollScenarioEditor.setBorder(null);
+		scrollScenarioEditor.getVerticalScrollBar().setUnitIncrement(25);
 		frame.getContentPane().add(scrollScenarioEditor);
 		
 		// The Panel Editor creates the panels
