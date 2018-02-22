@@ -31,6 +31,7 @@ import java.awt.Font;
 public class KeyPhraseTemplate extends JPanel {
 
 	private static int templateCounter;
+
 	/**
 	 * @wbp.factory
 	 * @wbp.factory.parameter.source text "Key Phrase Template"
@@ -39,38 +40,14 @@ public class KeyPhraseTemplate extends JPanel {
 		JLabel label = new JLabel(text);
 		return label;
 	}
+
 	private List<JTextField> textFieldList = new ArrayList<>();
 
 	private final ButtonGroup rightButtonGroup = new ButtonGroup();
 
 	private int templateID;
 
-	public KeyPhraseTemplate() {
-		this("Text Line");
-	}
-
-	public KeyPhraseTemplate(boolean isDoubleBuffered) {
-		super(isDoubleBuffered);
-		// TODO Auto-generated constructor stub
-	}
-
-	public KeyPhraseTemplate(LayoutManager layout) {
-		super(layout);
-		// TODO Auto-generated constructor stub
-	}
-
-	public KeyPhraseTemplate(LayoutManager layout, boolean isDoubleBuffered) {
-		super(layout, isDoubleBuffered);
-		// TODO Auto-generated constructor stub
-	}
-
-	public KeyPhraseTemplate(String line) {
-		this(line, "Key Phrase Template");
-
-	}
-	public KeyPhraseTemplate(String line, String template) {
-
-		templateID = templateCounter++;
+	protected void initGUI(String line, String template) {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 
 		JButton btnMoveUp = new JButton("Move Up");
@@ -96,9 +73,9 @@ public class KeyPhraseTemplate extends JPanel {
 
 		JLabel lblKeyPhraseTemplate = createJLabel(template);
 
-		JTextArea lblTextLine = KeyPhraseTemplate.createJTextArea(line, new Font("Monospaced", Font.PLAIN, 24), CENTER_ALIGNMENT, CENTER_ALIGNMENT, true);
-		//lblTextLine.setEnabled(false);
-		
+		JTextArea lblTextLine = KeyPhraseTemplate.createJTextArea(line, new Font("Monospaced", Font.PLAIN, 24),
+				CENTER_ALIGNMENT, CENTER_ALIGNMENT, true);
+		// lblTextLine.setEnabled(false);
 
 		JButton btnDelete = new JButton("Delete");
 		rightButtonGroup.add(btnDelete);
@@ -107,7 +84,7 @@ public class KeyPhraseTemplate extends JPanel {
 				.createSequentialGroup().addContainerGap()
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblKeyPhraseTemplate)
 						.addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE, 323, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
 				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnInsertAbove, 0, 0, Short.MAX_VALUE)
@@ -116,24 +93,57 @@ public class KeyPhraseTemplate extends JPanel {
 								Short.MAX_VALUE)
 						.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
 				.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addComponent(lblKeyPhraseTemplate).addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lblTextLine, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(37)
-								.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnInsert, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE).addGap(2)))
-				.addGap(38)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+										.addComponent(lblKeyPhraseTemplate).addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblTextLine, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup().addGap(37)
+										.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnInsert,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(2).addGap(38)));
 		setLayout(groupLayout);
+	}
+
+	public KeyPhraseTemplate() {
+		this("Text Line");
+	}
+
+	public KeyPhraseTemplate(boolean isDoubleBuffered) {
+		super(isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KeyPhraseTemplate(LayoutManager layout) {
+		super(layout);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KeyPhraseTemplate(LayoutManager layout, boolean isDoubleBuffered) {
+		super(layout, isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KeyPhraseTemplate(String line) {
+		this(line, "Key Phrase Template");
+
+	}
+
+	public KeyPhraseTemplate(String line, String template) {
+
+		templateID = templateCounter++;
+		this.initGUI(line, template);
+		
 	}
 
 	public int getID() {
@@ -147,21 +157,24 @@ public class KeyPhraseTemplate extends JPanel {
 	public void setText(int index, String text) {
 		textFieldList.get(index).setText(text);
 	}
+
 	/**
 	 * @wbp.factory
 	 * @wbp.factory.parameter.source text line
-	 * @wbp.factory.parameter.source font new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 24)
+	 * @wbp.factory.parameter.source font new java.awt.Font("Monospaced",
+	 *                               java.awt.Font.PLAIN, 24)
 	 * @wbp.factory.parameter.source alignmentX CENTER_ALIGNMENT
 	 * @wbp.factory.parameter.source alignmentY CENTER_ALIGNMENT
 	 */
-	protected static JTextArea createJTextArea(String text, Font font, float alignmentX, float alignmentY, boolean enabled) {
+	protected static JTextArea createJTextArea(String text, Font font, float alignmentX, float alignmentY,
+			boolean enabled) {
 		JTextArea textArea = new JTextArea(text);
 		textArea.setFont(font);
 		textArea.setAlignmentX(alignmentX);
 		textArea.setAlignmentY(alignmentY);
 		textArea.setEnabled(enabled);
 
-		//System.out.println("this method is used");
+		// System.out.println("this method is used");
 		return textArea;
 	}
 }

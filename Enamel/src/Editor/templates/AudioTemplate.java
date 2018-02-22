@@ -16,6 +16,7 @@ public class AudioTemplate extends KeyPhraseTemplate {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public AudioTemplate(LayoutManager layout) {
 		super(layout);
 		// TODO Auto-generated constructor stub
