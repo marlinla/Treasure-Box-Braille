@@ -1,15 +1,18 @@
 package Editor.templates;
 
+import java.awt.Font;
 import java.awt.LayoutManager;
+
+import javax.swing.JTextArea;
 
 public class AudioTemplate extends KeyPhraseTemplate {
 
 	public AudioTemplate() {
-		// TODO Auto-generated constructor stub
+		this("Line Text");
 	}
 
 	public AudioTemplate(String line) {
-		super(line);
+		super(line, "Audio Template");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -28,4 +31,13 @@ public class AudioTemplate extends KeyPhraseTemplate {
 		// TODO Auto-generated constructor stub
 	}
 
+	protected static JTextArea createJTextArea(String text, Font font, float alignmentX, float alignmentY, boolean enabled) {
+		JTextArea textArea = new JTextArea(text);
+		textArea.setFont(font);
+		textArea.setAlignmentX(alignmentX);
+		textArea.setAlignmentY(alignmentY);
+		textArea.setEnabled(false);
+		
+		return textArea;
+	}
 }
