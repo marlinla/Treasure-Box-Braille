@@ -5,11 +5,11 @@ import java.awt.LayoutManager;
 public class TextTemplate extends KeyPhraseTemplate {
 
 	public TextTemplate() {
-		// TODO Auto-generated constructor stub
+		this("Line Text zzz");
 	}
 
 	public TextTemplate(String line) {
-		super(line);
+		super(line, "Text Template");
 		// TODO Auto-generated constructor stub
 	}
 
