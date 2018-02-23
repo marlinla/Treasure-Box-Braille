@@ -36,6 +36,10 @@ import java.awt.Font;
 
 public class KeyPhraseTemplate extends JPanel {
 
+	private static final String QUESTION_TEMPLATE = "QUESTION_TEMPLATE";
+	private static final String AUDIO_TEMPLATE = "AUDIO_TEMPLATE";
+	private static final String TEXT_TEMPLATE = "TEXT_TEMPLATE";
+
 	/**
 	 * @wbp.factory
 	 * @wbp.factory.parameter.source text "Key Phrase Template"
@@ -49,10 +53,11 @@ public class KeyPhraseTemplate extends JPanel {
 	protected final ButtonGroup rightButtonGroup = new ButtonGroup();
 	protected int templateID;
 	protected static int templateCounter;
+	protected JPanel panel = new JPanel();
 
-	protected void initGUI(String line, String template) {
+	protected void initGUI(String template, String ...line) {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-
+		panel = createJPanel(template, line);
 		JButton btnMoveUp = new JButton("Move Up");
 		btnMoveUp.setPreferredSize(new Dimension(150, 40));
 		btnMoveUp.addActionListener(new ActionListener() {
@@ -145,70 +150,80 @@ public class KeyPhraseTemplate extends JPanel {
 		});
 
 		rightButtonGroup.add(btnDelete);
-
-		JPanel panel = createJPanel(gl_panel);
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblKeyPhraseTemplate)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnInsertAbove, 0, 0, Short.MAX_VALUE)
-						.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-						.addComponent(btnInsertBelow, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap().addComponent(lblKeyPhraseTemplate).addGap(12)
-				.addGroup(groupLayout
-						.createParallelGroup(
-								Alignment.LEADING)
-						.addGroup(
-								groupLayout.createSequentialGroup()
-										.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnInsertBelow, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnMoveDown,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblKeyPhraseTemplate)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 475, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnInsertAbove, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnDelete, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnInsertBelow, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblKeyPhraseTemplate)
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnInsertBelow, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-				.addGap(40)));
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 360, Short.MAX_VALUE)
+					.addGap(40))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 139, Short.MAX_VALUE)
-		);
+		
 		setLayout(groupLayout);
 		// TODO Auto-generated constructor stub
 
 	}
 
+	private JPanel createJPanel(String template, String[] line) {
+		if (template.equals(AUDIO_TEMPLATE)) {
+			return new AudioTemplate(line[0]);
+		}
+		else if (template.equals(QUESTION_TEMPLATE)) {
+			return  new QuestionTemplate(line);
+		}
+		else {
+			return new TextTemplate(line[0]);
+		}
+	}
+	
+
 	public KeyPhraseTemplate() {
-		this("Text Line");
+		this("Default text");
 	}
 
 	public KeyPhraseTemplate(String line) {
-		this(line, "Key Phrase Template");
+		this("TextTemplate", line);
 
 	}
 
-	public KeyPhraseTemplate(String line, String template) {
+	public KeyPhraseTemplate(String template, String ...line) {
 
 		templateID = templateCounter++;
-		this.initGUI(line, template);
+		this.initGUI(template, line);
 
 	}
 
@@ -245,14 +260,5 @@ public class KeyPhraseTemplate extends JPanel {
 
 		// System.out.println("this method is used");
 		return textArea;
-	}
-	/**
-	 * @wbp.factory
-	 * @wbp.factory.parameter.source layout gl_panel
-	 */
-	public static JPanel createJPanel(LayoutManager layout) {
-		JPanel panel = new JPanel();
-		panel.setLayout(layout);
-		return panel;
 	}
 }

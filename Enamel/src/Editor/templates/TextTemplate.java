@@ -18,8 +18,6 @@ public class TextTemplate extends JPanel {
 	protected final Box verticalBoxTop = Box.createVerticalBox();
 	protected final Box verticalBoxCenter = Box.createVerticalBox();
 	protected final Box verticalBoxBottom = Box.createVerticalBox();
-	protected final JLabel lblTextLine = new JLabel("Text Line");
-	protected final JButton btnTextButton = new JButton("Text Button");
 
 	
 	protected final JTextField textField = new JTextField("Default Text");
@@ -34,15 +32,8 @@ public class TextTemplate extends JPanel {
 		textField.setText(line);
 			verticalBoxCenter.add(textField);
 		add(verticalBoxTop);
-		verticalBoxTop.add(lblTextLine);
 		verticalBoxTop.add(verticalBoxCenter);
 		verticalBoxCenter.add(verticalBoxBottom);
-		btnTextButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		verticalBoxBottom.add(btnTextButton);
 	}
 
 	public TextTemplate(String line) {

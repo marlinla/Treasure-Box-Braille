@@ -18,15 +18,50 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import Editor.PanelEditor;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.JTextField;
 
-public class AudioTemplate extends KeyPhraseTemplate {
+public class AudioTemplate extends JPanel {
+	protected final Box verticalBox = Box.createVerticalBox();
+	protected final JLabel lblwavFile = new JLabel(".wav File:");
+	protected final JTextField txtNoAudioFile = new JTextField("No Audio File Loaded!");
+	protected final Box horizontalBox = Box.createHorizontalBox();
+	protected final JButton btnOpenAudioFile = new JButton("Open Audio File...");
+	protected final JButton btnRecordAudioFile = new JButton("Record Audio File...");
+	protected final JButton btnPreviewAudioFile = new JButton("Preview Audio File...");
+	protected final Component horizontalGlue = Box.createHorizontalGlue();
+	protected final JButton btnClearAudioFile = new JButton("Clear Audio File");
 
 	public AudioTemplate() {
-		this("Line Text");
+		this("No Audio File Loaded!");
+	}
+	private void initGUI(String line) {
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		txtNoAudioFile.setText(line);
+		add(verticalBox);
+		verticalBox.add(lblwavFile);
+		txtNoAudioFile.setEditable(false);
+		verticalBox.add(txtNoAudioFile);
+		txtNoAudioFile.setColumns(10);
+		horizontalBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		verticalBox.add(horizontalBox);
+		
+		horizontalBox.add(btnOpenAudioFile);
+		
+		horizontalBox.add(btnRecordAudioFile);
+		
+		horizontalBox.add(btnPreviewAudioFile);
+		
+		horizontalBox.add(horizontalGlue);
+		
+		horizontalBox.add(btnClearAudioFile);
 	}
 
 	public AudioTemplate(String line) {
-		super(line, "Audio Template");
+		super();
+		initGUI(line);
 		//initGUI(line, "Audio Template");
 	}
 
