@@ -206,7 +206,7 @@ public class KeyPhraseTemplate extends JPanel {
 			return  new QuestionTemplate(line);
 		}
 		else {
-			return new TextTemplate(line[0]);
+			return new BrailleTemplate(line[0]);
 		}
 	}
 	
