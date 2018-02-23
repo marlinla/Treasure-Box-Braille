@@ -39,6 +39,7 @@ public class KeyPhraseTemplate extends JPanel {
 	private static final String QUESTION_TEMPLATE = "QUESTION_TEMPLATE";
 	private static final String AUDIO_TEMPLATE = "AUDIO_TEMPLATE";
 	private static final String TEXT_TEMPLATE = "TEXT_TEMPLATE";
+	private static final String BRAILLE_TEMPLATE = "BRAILLE_TEMPLATE";
 
 	/**
 	 * @wbp.factory
