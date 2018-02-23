@@ -55,19 +55,20 @@ public class KeyPhraseTemplate extends JPanel {
 	protected static int templateCounter;
 	protected JPanel panel = new JPanel();
 
-	protected void initGUI(String template, String ...line) {
+	protected void initGUI(String template, String... line) {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panel = createJPanel(template, line);
 		JButton btnMoveUp = new JButton("Move Up");
+
 		btnMoveUp.setPreferredSize(new Dimension(150, 40));
 		btnMoveUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KeyPhraseTemplate kpt = (KeyPhraseTemplate) btnMoveUp.getParent();
+				Object kpt = btnMoveUp.getParent();
 				PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
 				for (int i = 0; i < PanelEditor.listTemplates.size(); i++) {
 					if (PanelEditor.listTemplates.get(i).equals(kpt)) {
 						try {
-							KeyPhraseTemplate tmp = PanelEditor.listTemplates.get(i);
+							Object tmp = PanelEditor.listTemplates.get(i);
 							PanelEditor.listTemplates.set(i, PanelEditor.listTemplates.get(i - 1));
 							PanelEditor.listTemplates.set(i - 1, tmp);
 							pe.recreate();
@@ -84,12 +85,12 @@ public class KeyPhraseTemplate extends JPanel {
 		JButton btnMoveDown = new JButton("Move Down");
 		btnMoveDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KeyPhraseTemplate kpt = (KeyPhraseTemplate) btnMoveUp.getParent();
+				Object kpt = btnMoveUp.getParent();
 				PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
 				for (int i = 0; i < PanelEditor.listTemplates.size(); i++) {
 					if (PanelEditor.listTemplates.get(i).equals(kpt)) {
 						try {
-							KeyPhraseTemplate tmp = PanelEditor.listTemplates.get(i + 1);
+							Object tmp = PanelEditor.listTemplates.get(i + 1);
 							PanelEditor.listTemplates.set(i + 1, PanelEditor.listTemplates.get(i));
 							PanelEditor.listTemplates.set(i, tmp);
 							pe.recreate();
@@ -108,24 +109,85 @@ public class KeyPhraseTemplate extends JPanel {
 		rightButtonGroup.add(btnInsertBelow);
 		btnInsertBelow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KeyPhraseTemplate kpt = (KeyPhraseTemplate) btnMoveUp.getParent();
-				int indexKpt = PanelEditor.listTemplates.indexOf(kpt) + 1;
-				PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
-				KeyPhraseTemplate newKpt = new KeyPhraseTemplate();
-				PanelEditor.listTemplates.add(indexKpt, newKpt);
-				pe.recreate();
+				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE };
+
+				String choice = (String) JOptionPane.showInputDialog(null,
+						"Choose a template that you would like to insert below", "Template chooser",
+						JOptionPane.QUESTION_MESSAGE, null, choiceOfTemplate, // Array of choices
+						choiceOfTemplate[0]); // Initial choice
+				
+				try {
+					if (choice.equals(QUESTION_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt) + 1;
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(QUESTION_TEMPLATE, "Ask your question here.");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					} else if (choice.equals(AUDIO_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt) + 1;
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(AUDIO_TEMPLATE, "Record Audio");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					} else if (choice.equals(TEXT_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt) + 1;
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(TEXT_TEMPLATE, "Enter Text Here");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					}
+				} catch (Exception e2) {
+					
+				}
+
+				
 			}
 		});
 
 		JButton btnInsertAbove = new JButton("Insert Above");
 		btnInsertAbove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KeyPhraseTemplate kpt = (KeyPhraseTemplate) btnMoveUp.getParent();
-				int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
-				PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
-				KeyPhraseTemplate newKpt = new KeyPhraseTemplate();
-				PanelEditor.listTemplates.add(indexKpt, newKpt);
-				pe.recreate();
+
+				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE };
+
+				String choice = (String) JOptionPane.showInputDialog(null,
+						"Choose a template that you would like to insert below", "Template chooser",
+						JOptionPane.QUESTION_MESSAGE, null, choiceOfTemplate, // Array of choices
+						choiceOfTemplate[0]); // Initial choice
+				
+				try {
+					if (choice.equals(QUESTION_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(QUESTION_TEMPLATE, "Ask your question here.");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					} else if (choice.equals(AUDIO_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(AUDIO_TEMPLATE, "Record Audio");
+								PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					} else if (choice.equals(TEXT_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(TEXT_TEMPLATE, "Enter Text Here");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
+					}
+				} catch (Exception e2) {
+					
+				}
+				
 			}
 		});
 
@@ -137,9 +199,9 @@ public class KeyPhraseTemplate extends JPanel {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KeyPhraseTemplate kpt = (KeyPhraseTemplate) btnDelete.getParent();
+				Object kpt = btnDelete.getParent();
 				PanelEditor pe = (PanelEditor) btnDelete.getParent().getParent();
-				for (KeyPhraseTemplate item : PanelEditor.listTemplates) {
+				for (Object item : PanelEditor.listTemplates) {
 					if (item.equals(kpt)) {
 						PanelEditor.listTemplates.remove(item);
 						pe.recreate();
@@ -151,48 +213,49 @@ public class KeyPhraseTemplate extends JPanel {
 
 		rightButtonGroup.add(btnDelete);
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblKeyPhraseTemplate)
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblKeyPhraseTemplate)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 475, Short.MAX_VALUE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnInsertAbove, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnDelete, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnInsertBelow, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblKeyPhraseTemplate)
-					.addGap(12)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnInsertBelow, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnMoveDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGap(18)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+						.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnInsertAbove, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnDelete, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnInsertBelow, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnMoveDown, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 133,
+										Short.MAX_VALUE)))
+						.addGroup(Alignment.TRAILING,
+								groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnMoveUp, GroupLayout.PREFERRED_SIZE, 133,
+												GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap().addComponent(lblKeyPhraseTemplate).addGap(12)
+				.addGroup(groupLayout
+						.createParallelGroup(
+								Alignment.LEADING)
+						.addGroup(
+								groupLayout.createSequentialGroup()
+										.addComponent(btnMoveUp, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnInsertAbove, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnInsertBelow, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnMoveDown,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-					.addGap(40))
-		);
-		
+				.addGap(40)));
+
 		setLayout(groupLayout);
 		// TODO Auto-generated constructor stub
 
@@ -201,15 +264,12 @@ public class KeyPhraseTemplate extends JPanel {
 	private JPanel createJPanel(String template, String[] line) {
 		if (template.equals(AUDIO_TEMPLATE)) {
 			return new AudioTemplate(line[0]);
-		}
-		else if (template.equals(QUESTION_TEMPLATE)) {
-			return  new QuestionTemplate(line);
-		}
-		else {
+		} else if (template.equals(QUESTION_TEMPLATE)) {
+			return new QuestionTemplate(line);
+		} else {
 			return new TextTemplate(line[0]);
 		}
 	}
-	
 
 	public KeyPhraseTemplate() {
 		this("Default text");
@@ -220,7 +280,7 @@ public class KeyPhraseTemplate extends JPanel {
 
 	}
 
-	public KeyPhraseTemplate(String template, String ...line) {
+	public KeyPhraseTemplate(String template, String... line) {
 
 		templateID = templateCounter++;
 		this.initGUI(template, line);
@@ -261,4 +321,5 @@ public class KeyPhraseTemplate extends JPanel {
 		// System.out.println("this method is used");
 		return textArea;
 	}
+
 }

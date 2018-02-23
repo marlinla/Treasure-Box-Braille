@@ -348,6 +348,7 @@ public class Editor {
 		panelHeader.add(labelSelectedFile);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
+		btnRemove.getAccessibleContext().setAccessibleDescription("The Remove button removes the currently selected file");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Remove the components

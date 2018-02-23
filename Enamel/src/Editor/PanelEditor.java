@@ -1,5 +1,6 @@
 package Editor;
 
+import java.awt.Component;
 import java.awt.LayoutManager;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import Editor.templates.KeyPhraseTemplate;
 
 public class PanelEditor extends JPanel {
 
-	public static List<KeyPhraseTemplate> listTemplates = new ArrayList<>();
+	public static List<Object> listTemplates = new ArrayList<Object>();
 	public static File scenarioFile;
 
 	public PanelEditor(File file) throws FileNotFoundException {
@@ -26,9 +27,9 @@ public class PanelEditor extends JPanel {
 		Scanner scenario = new Scanner(file);
 		this.scenarioFile = file;
 		while (scenario.hasNextLine()) {
-			KeyPhraseTemplate temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
+			Object temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
 			listTemplates.add(temp);
-			this.add(temp);
+			this.add((Component) temp);
 		}
 	}
 
@@ -49,8 +50,8 @@ public class PanelEditor extends JPanel {
 	
 	public void recreate() {
 		this.removeAll();
-		for (KeyPhraseTemplate kpt : listTemplates) {
-			this.add(kpt);
+		for (Object kpt : listTemplates) {
+			this.add((Component) kpt);
 		}
 		this.revalidate();
 		this.repaint();
