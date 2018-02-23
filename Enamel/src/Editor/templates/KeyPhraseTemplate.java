@@ -146,7 +146,7 @@ public class KeyPhraseTemplate extends JPanel {
 
 		rightButtonGroup.add(btnDelete);
 
-		JPanel panel = new JPanel();
+		JPanel panel = createJPanel(gl_panel);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
 				.createSequentialGroup().addContainerGap()
@@ -182,18 +182,15 @@ public class KeyPhraseTemplate extends JPanel {
 												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
 				.addGap(40)));
-
-		JTextArea lblTextLine = KeyPhraseTemplate.createJTextArea(line, new Font("Monospaced", Font.PLAIN, 24),
-				Component.LEFT_ALIGNMENT, Component.CENTER_ALIGNMENT, true);
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel
-						.createSequentialGroup().addContainerGap().addComponent(lblTextLine, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(220, Short.MAX_VALUE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(50).addComponent(lblTextLine).addGap(52)));
-		panel.setLayout(gl_panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 360, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 139, Short.MAX_VALUE)
+		);
 		setLayout(groupLayout);
 		// TODO Auto-generated constructor stub
 
@@ -248,5 +245,14 @@ public class KeyPhraseTemplate extends JPanel {
 
 		// System.out.println("this method is used");
 		return textArea;
+	}
+	/**
+	 * @wbp.factory
+	 * @wbp.factory.parameter.source layout gl_panel
+	 */
+	public static JPanel createJPanel(LayoutManager layout) {
+		JPanel panel = new JPanel();
+		panel.setLayout(layout);
+		return panel;
 	}
 }
