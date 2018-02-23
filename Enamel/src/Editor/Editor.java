@@ -320,7 +320,7 @@ public class Editor {
 	 */
 	private void openTheScenarioFile(JButton btn) {
 		JFileChooser fc = new JFileChooser();
-		fc.setCurrentDirectory(new File("FactoryScenarios/"));
+		fc.setCurrentDirectory(new File(System.getProperty("user.home")));
 		int returnVal = fc.showOpenDialog(btn);
 
 		if (returnVal == fc.APPROVE_OPTION) {

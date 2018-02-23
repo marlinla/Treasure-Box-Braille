@@ -59,8 +59,9 @@ public class KeyPhraseTemplate extends JPanel {
 	protected void initGUI(String template, String... line) {
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panel = createJPanel(template, line);
+		
 		JButton btnMoveUp = new JButton("Move Up");
-
+		btnMoveUp.getAccessibleContext().setAccessibleDescription("The Move up button swaps the template that is on top of this template. Button 1 of 5");
 		btnMoveUp.setPreferredSize(new Dimension(150, 40));
 		btnMoveUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,6 +85,7 @@ public class KeyPhraseTemplate extends JPanel {
 		rightButtonGroup.add(btnMoveUp);
 
 		JButton btnMoveDown = new JButton("Move Down");
+		btnMoveDown.getAccessibleContext().setAccessibleDescription("The move down button swaps this template with the template below it. Button 5 of 5");
 		btnMoveDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object kpt = btnMoveUp.getParent();
@@ -107,16 +109,17 @@ public class KeyPhraseTemplate extends JPanel {
 		rightButtonGroup.add(btnMoveDown);
 
 		JButton btnInsertBelow = new JButton("Insert Below");
+		btnInsertBelow.getAccessibleContext().setAccessibleDescription("The Insert below button allows you to insert a template of your choice below this template. Button 4 of 5");
 		rightButtonGroup.add(btnInsertBelow);
 		btnInsertBelow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE };
+				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE, BRAILLE_TEMPLATE };
 
 				String choice = (String) JOptionPane.showInputDialog(null,
 						"Choose a template that you would like to insert below", "Template chooser",
 						JOptionPane.QUESTION_MESSAGE, null, choiceOfTemplate, // Array of choices
 						choiceOfTemplate[0]); // Initial choice
-				
+
 				try {
 					if (choice.equals(QUESTION_TEMPLATE)) {
 						Object kpt = btnMoveUp.getParent();
@@ -142,26 +145,34 @@ public class KeyPhraseTemplate extends JPanel {
 						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(TEXT_TEMPLATE, "Enter Text Here");
 						PanelEditor.listTemplates.add(indexKpt, newkpt);
 						pe.recreate();
+					} else if (choice.equals(BRAILLE_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt) + 1;
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(BRAILLE_TEMPLATE, "Configure Braille cells");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
 					}
 				} catch (Exception e2) {
-					
+
 				}
 
-				
 			}
 		});
 
 		JButton btnInsertAbove = new JButton("Insert Above");
+		btnInsertAbove.getAccessibleContext().setAccessibleDescription("The Insert above button allows you to insert a template of your choice above this template. Button 2 of 5");
 		btnInsertAbove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE };
+				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE, BRAILLE_TEMPLATE };
 
 				String choice = (String) JOptionPane.showInputDialog(null,
 						"Choose a template that you would like to insert below", "Template chooser",
 						JOptionPane.QUESTION_MESSAGE, null, choiceOfTemplate, // Array of choices
 						choiceOfTemplate[0]); // Initial choice
-				
+
 				try {
 					if (choice.equals(QUESTION_TEMPLATE)) {
 						Object kpt = btnMoveUp.getParent();
@@ -175,7 +186,7 @@ public class KeyPhraseTemplate extends JPanel {
 						int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
 						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
 						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(AUDIO_TEMPLATE, "Record Audio");
-								PanelEditor.listTemplates.add(indexKpt, newkpt);
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
 						pe.recreate();
 					} else if (choice.equals(TEXT_TEMPLATE)) {
 						Object kpt = btnMoveUp.getParent();
@@ -184,11 +195,18 @@ public class KeyPhraseTemplate extends JPanel {
 						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(TEXT_TEMPLATE, "Enter Text Here");
 						PanelEditor.listTemplates.add(indexKpt, newkpt);
 						pe.recreate();
+					} else if (choice.equals(BRAILLE_TEMPLATE)) {
+						Object kpt = btnMoveUp.getParent();
+						int indexKpt = PanelEditor.listTemplates.indexOf(kpt);
+						PanelEditor pe = (PanelEditor) btnMoveUp.getParent().getParent();
+						KeyPhraseTemplate newkpt = new KeyPhraseTemplate(BRAILLE_TEMPLATE, "Configure Braille cells");
+						PanelEditor.listTemplates.add(indexKpt, newkpt);
+						pe.recreate();
 					}
 				} catch (Exception e2) {
-					
+
 				}
-				
+
 			}
 		});
 
@@ -198,6 +216,7 @@ public class KeyPhraseTemplate extends JPanel {
 		// lblTextLine.setEnabled(false);
 
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.getAccessibleContext().setAccessibleDescription("The delete button deletes this template. Button 3 of 5");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object kpt = btnDelete.getParent();
@@ -267,6 +286,8 @@ public class KeyPhraseTemplate extends JPanel {
 			return new AudioTemplate(line[0]);
 		} else if (template.equals(QUESTION_TEMPLATE)) {
 			return new QuestionTemplate(line);
+		} else if (template.equals(BRAILLE_TEMPLATE)) {
+			return new BrailleTemplate(line[0]);
 		} else {
 			return new TextTemplate(line[0]);
 		}
