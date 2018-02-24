@@ -114,7 +114,7 @@ public class Editor {
 		});
 
 		btnFile.getAccessibleContext().setAccessibleDescription(
-				"The File button opens up the file tab that lets you open, create or edit scenario files. Button 1 of 3");
+				"opens up the file tab that lets you open, create or edit scenario files. Button 1 of 3");
 		btnFile.setToolTipText("Open, create or play scenario files");
 		btnFile.setBorderPainted(false);
 		btnFile.setBackground(Color.WHITE);
@@ -154,7 +154,7 @@ public class Editor {
 		});
 
 		btnEdit.getAccessibleContext().setAccessibleDescription(
-				"The Edit button opens up the edit tab that lets you edit already saved scenarios. Button 2 of 3");
+				"opens up the edit tab that lets you edit already saved scenarios. Button 2 of 3");
 		btnEdit.setToolTipText("Edit scenario files");
 		btnEdit.setBorderPainted(false);
 		btnEdit.setBackground(Color.WHITE);
@@ -190,7 +190,7 @@ public class Editor {
 		});
 
 		btnHelp.getAccessibleContext()
-				.setAccessibleDescription("The Help Button opens up the user manual. Button 3 of 3");
+				.setAccessibleDescription("opens up the user manual. Button 3 of 3");
 		btnHelp.setToolTipText("Opens up the User Manual");
 		btnHelp.setBorderPainted(false);
 		btnHelp.setBackground(Color.WHITE);
@@ -246,7 +246,7 @@ public class Editor {
 			}
 		});
 		btnOpenScenario.getAccessibleContext().setAccessibleDescription(
-				"The Open scenario button lets you select a scenario file to play. Button 1 of 3");
+				"lets you select a scenario file to play. Button 1 of 3");
 		btnOpenScenario.setToolTipText("Select a scenario file to open");
 		btnOpenScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnOpenScenario);
@@ -256,7 +256,7 @@ public class Editor {
 
 		btnCreateScenario.setToolTipText("Opens the scenario file creator");
 		btnCreateScenario.getAccessibleContext()
-				.setAccessibleDescription("Create scenario helps you create a scenario file. Button 2 of 3");
+				.setAccessibleDescription("helps you create a scenario file. Button 2 of 3");
 		btnCreateScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnCreateScenario);
 
@@ -270,7 +270,7 @@ public class Editor {
 		});
 
 		btnPlayScenario.getAccessibleContext().setAccessibleDescription("Plays the scenario file that you selected");
-		btnPlayScenario.setToolTipText("The play scenario button plays the Scenario File that you selected");
+		btnPlayScenario.setToolTipText("plays the Scenario File that you selected. Button 3 of 3");
 		btnPlayScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnPlayScenario);
 		// Accessibility description for the file ribbon
@@ -349,7 +349,6 @@ public class Editor {
 		panelHeader.add(labelSelectedFile);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.getAccessibleContext().setAccessibleDescription("The Remove button removes the currently selected file");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Remove the components
@@ -364,7 +363,7 @@ public class Editor {
 
 		btnRemove.setToolTipText("Removes the currently selected file");
 		btnRemove.getAccessibleContext()
-				.setAccessibleDescription("The remove button removes the file that you just selected");
+				.setAccessibleDescription("removes the file that you just selected");
 		btnRemove.setBackground(Color.RED);
 		btnRemove.setForeground(Color.WHITE);
 		btnRemove.setBounds(705, 0, 80, 26);

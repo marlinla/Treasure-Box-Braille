@@ -59,10 +59,10 @@ public class AudioTemplate extends JPanel {
 		horizontalBox.add(btnClearAudioFile);
 		
 		//accessiblity
-		btnOpenAudioFile.getAccessibleContext().setAccessibleDescription("The open audio file button opens an audio file. Button 1 of 4");
-		btnRecordAudioFile.getAccessibleContext().setAccessibleDescription("The record audio button lets you record your own audio file. Button 2 of 4 ");
-		btnPreviewAudioFile.getAccessibleContext().setAccessibleDescription("The preview audio button lets you preview the audio you just selected. Button 3 of 4");
-		btnClearAudioFile.getAccessibleContext().setAccessibleDescription("The clear audio button clears the audio file you just selected");
+		btnOpenAudioFile.getAccessibleContext().setAccessibleDescription("opens an audio file. Button 1 of 4");
+		btnRecordAudioFile.getAccessibleContext().setAccessibleDescription("lets you record your own audio file. Button 2 of 4 ");
+		btnPreviewAudioFile.getAccessibleContext().setAccessibleDescription("lets you preview the audio you just selected. Button 3 of 4");
+		btnClearAudioFile.getAccessibleContext().setAccessibleDescription("clears the audio file you just selected. Button 4 of 4");
 	}
 
 	public AudioTemplate(String line) {
