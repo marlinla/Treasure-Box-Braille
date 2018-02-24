@@ -74,6 +74,7 @@ public class Editor {
 		frame.setTitle("The Authoring App");
 		frame.setBounds(175, 25, 800, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 
 		// This is the header panel that holds the buttons on top of the application
@@ -344,7 +345,7 @@ public class Editor {
 		// The JLabel to hold the selected file
 		labelSelectedFile.setText("Selected File:  '" + file.getName() + "'  ");
 		labelSelectedFile.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelSelectedFile.setBounds(489, 0, 216, 26);
+		labelSelectedFile.setBounds(495, 0, 211, 26);
 		panelHeader.add(labelSelectedFile);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
