@@ -169,7 +169,7 @@ public class KeyPhraseTemplate extends JPanel {
 				String[] choiceOfTemplate = { QUESTION_TEMPLATE, AUDIO_TEMPLATE, TEXT_TEMPLATE, BRAILLE_TEMPLATE };
 
 				String choice = (String) JOptionPane.showInputDialog(null,
-						"Choose a template that you would like to insert below", "Template chooser",
+						"Choose a template that you would like to insert above", "Template chooser",
 						JOptionPane.QUESTION_MESSAGE, null, choiceOfTemplate, // Array of choices
 						choiceOfTemplate[0]); // Initial choice
 
