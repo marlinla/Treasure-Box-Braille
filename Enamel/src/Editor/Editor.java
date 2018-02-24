@@ -182,7 +182,7 @@ public class Editor {
 			public void actionPerformed(ActionEvent e) {
 				// Clicking on the Help button opens up the User Manual on the github repository
 				try {
-					Desktop.getDesktop().browse(new URL("https://github.com/marlinla/Treasure-Box-Braille").toURI());
+					Desktop.getDesktop().browse(new URL("https://github.com/marlinla/Treasure-Box-Braille/blob/master/Documentation/User%20Manual.pdf").toURI());
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
