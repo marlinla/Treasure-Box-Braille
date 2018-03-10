@@ -79,7 +79,7 @@ public class Editor {
 
 		// This is the header panel that holds the buttons on top of the application
 		panelHeader.setBackground(Color.WHITE);
-		panelHeader.setBounds(0, 0, 784, 26);
+		panelHeader.setBounds(0, 0, 794, 26);
 		frame.getContentPane().add(panelHeader);
 		panelHeader.setLayout(null);
 
@@ -106,7 +106,7 @@ public class Editor {
 				frame.remove(ribbonEdit); // removes existing ribbons first
 
 				ribbonFile.setBackground(SystemColor.activeCaption);
-				ribbonFile.setBounds(0, 26, 784, 36);
+				ribbonFile.setBounds(0, 26, 800, 36);
 				frame.getContentPane().add(ribbonFile);
 
 				addFileRibbonComponents(ribbonFile); // adds all the components to the file ribbon
@@ -145,7 +145,7 @@ public class Editor {
 				frame.remove(ribbonFile); // Removes existing ribbons first
 
 				ribbonEdit.setBackground(SystemColor.activeCaption);
-				ribbonEdit.setBounds(0, 26, 784, 36);
+				ribbonEdit.setBounds(0, 26, 800, 36);
 				frame.getContentPane().add(ribbonEdit);
 
 				addEditRibbonComponents(ribbonEdit); // adds all the components to the Edit ribbon
@@ -201,7 +201,7 @@ public class Editor {
 		panelFooter.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		panelFooter.setLayout(null);
 		panelFooter.setBackground(Color.WHITE);
-		panelFooter.setBounds(0, 635, 788, 24);
+		panelFooter.setBounds(0, 647, 794, 24);
 		frame.getContentPane().add(panelFooter);
 
 		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
@@ -345,7 +345,7 @@ public class Editor {
 		// The JLabel to hold the selected file
 		labelSelectedFile.setText("Selected File:  '" + file.getName() + "'  ");
 		labelSelectedFile.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelSelectedFile.setBounds(495, 0, 211, 26);
+		labelSelectedFile.setBounds(505, 0, 211, 26);
 		panelHeader.add(labelSelectedFile);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
@@ -366,7 +366,7 @@ public class Editor {
 				.setAccessibleDescription("removes the file that you just selected");
 		btnRemove.setBackground(Color.RED);
 		btnRemove.setForeground(Color.WHITE);
-		btnRemove.setBounds(705, 0, 80, 26);
+		btnRemove.setBounds(715, 0, 80, 26);
 		panelHeader.add(btnRemove);
 
 		panelHeader.revalidate();
@@ -399,7 +399,7 @@ public class Editor {
 		}
 		
 		// Initializes the editor through the scroll pane
-		scrollScenarioEditor.setBounds(0, 63, 784, 572);
+		scrollScenarioEditor.setBounds(0, 63, 794, 582);
 		scrollScenarioEditor.setBorder(null);
 		scrollScenarioEditor.getVerticalScrollBar().setUnitIncrement(25);
 		frame.getContentPane().add(scrollScenarioEditor);
