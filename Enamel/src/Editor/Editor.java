@@ -29,25 +29,28 @@ import enamel.ScenarioParser;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import org.eclipse.wb.swing.FocusTraversalOnArray;
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
 import javax.swing.JScrollPane;
-
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 public class Editor {
 
 	private JFrame frame;
 	private File openScenarioFile = null; // The File that gets chosen by the open Scenario Button
 	private boolean validScenarioFile;
+	private boolean btnFilePressed = false;
+	private boolean btnEditPressed = false;
+
 	// The Initialization of the ribbons and the panels
 	JPanel ribbonFile = new JPanel(); // File Ribbon
 	JPanel ribbonEdit = new JPanel(); // Edit Ribbon
 	JPanel panelHeader = new JPanel(); // The main panel that holds the top most buttons
-	JLabel labelSelectedFile = new JLabel(); // The selected file label that shows what file you selected
+	JLabel fileDisplayerLabel = new JLabel(); // The selected file label that shows what file you selected
 	JPanel panelFooter = new JPanel(); // The footer panel
 	JScrollPane scrollScenarioEditor = new JScrollPane(); // The scroll pane to hold the scenario editor
-	PanelEditor panelScenarioEditor; // the panel to hold all the edit template
+	PanelEditor panelScenarioEditor; // the panel to hold all the edit templates
 
 	/**
 	 * Launch the application.
@@ -76,10 +79,11 @@ public class Editor {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
+		panelHeader.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 
 		// This is the header panel that holds the buttons on top of the application
 		panelHeader.setBackground(Color.WHITE);
-		panelHeader.setBounds(0, 0, 794, 26);
+		panelHeader.setBounds(0, 0, 794, 27);
 		frame.getContentPane().add(panelHeader);
 		panelHeader.setLayout(null);
 
@@ -102,14 +106,22 @@ public class Editor {
 		// This is where the ribbon for the File button opens up
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ribbonFile.removeAll(); // remove all the components inside of the ribbon
-				frame.remove(ribbonEdit); // removes existing ribbons first
+				if (btnFilePressed) {
+					removeRibbon(ribbonFile);
+				} else {
+					ribbonFile.removeAll(); // remove all the components inside of the ribbon
+					frame.remove(ribbonEdit); // removes existing ribbons first
 
-				ribbonFile.setBackground(SystemColor.activeCaption);
-				ribbonFile.setBounds(0, 26, 800, 36);
-				frame.getContentPane().add(ribbonFile);
+					ribbonFile.setBackground(SystemColor.activeCaption);
+					ribbonFile.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+					ribbonFile.setBounds(0, 27, 800, 36);
+					frame.getContentPane().add(ribbonFile);
 
-				addFileRibbonComponents(ribbonFile); // adds all the components to the file ribbon
+					addFileRibbonComponents(ribbonFile); // adds all the components to the file ribbon
+
+					btnFilePressed = true;
+					btnEditPressed = false;
+				}
 			}
 		});
 
@@ -141,15 +153,22 @@ public class Editor {
 		btnEdit.addActionListener(new ActionListener() {
 			// This is where the ribbon for the edit button opens up
 			public void actionPerformed(ActionEvent e) {
-				ribbonEdit.removeAll(); // remove all the components inside of the ribbon
-				frame.remove(ribbonFile); // Removes existing ribbons first
+				if (btnEditPressed) {
+					removeRibbon(ribbonEdit);
+				} else {
+					ribbonEdit.removeAll(); // remove all the components inside of the ribbon
+					frame.remove(ribbonFile); // Removes existing ribbons first
 
-				ribbonEdit.setBackground(SystemColor.activeCaption);
-				ribbonEdit.setBounds(0, 26, 800, 36);
-				frame.getContentPane().add(ribbonEdit);
+					ribbonEdit.setBackground(SystemColor.activeCaption);
+					ribbonEdit.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+					ribbonEdit.setBounds(0, 27, 800, 36);
+					frame.getContentPane().add(ribbonEdit);
 
-				addEditRibbonComponents(ribbonEdit); // adds all the components to the Edit ribbon
+					addEditRibbonComponents(ribbonEdit); // adds all the components to the Edit ribbon
 
+					btnEditPressed = true;
+					btnFilePressed = false;
+				}
 			}
 		});
 
@@ -182,15 +201,16 @@ public class Editor {
 			public void actionPerformed(ActionEvent e) {
 				// Clicking on the Help button opens up the User Manual on the github repository
 				try {
-					Desktop.getDesktop().browse(new URL("https://github.com/marlinla/Treasure-Box-Braille/blob/master/Documentation/User%20Manual.pdf").toURI());
+					Desktop.getDesktop().browse(new URL(
+							"https://github.com/marlinla/Treasure-Box-Braille/blob/master/Documentation/User%20Manual.pdf")
+									.toURI());
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		});
 
-		btnHelp.getAccessibleContext()
-				.setAccessibleDescription("opens up the user manual. Button 3 of 3");
+		btnHelp.getAccessibleContext().setAccessibleDescription("opens up the user manual. Button 3 of 3");
 		btnHelp.setToolTipText("Opens up the User Manual");
 		btnHelp.setBorderPainted(false);
 		btnHelp.setBackground(Color.WHITE);
@@ -203,10 +223,6 @@ public class Editor {
 		panelFooter.setBackground(Color.WHITE);
 		panelFooter.setBounds(0, 647, 794, 24);
 		frame.getContentPane().add(panelFooter);
-
-		// frame.setFocusTraversalPolicy(new FocusTraversalOnArray(
-		// new Component[] { frame.getContentPane(), panelHeader, btnFile, btnEdit,
-		// btnHelp }));
 	}
 
 	/**
@@ -231,12 +247,28 @@ public class Editor {
 	}
 
 	/**
+	 * Removes the file or the edit ribbon when the mouse pointer is not on the
+	 * ribbons
+	 * 
+	 * @param btn
+	 */
+	private void removeRibbon(JPanel panel) {
+		btnFilePressed = false;
+		btnEditPressed = false;
+		panel.removeAll();
+		frame.remove(panel);
+		frame.revalidate();
+		frame.repaint();
+	}
+
+	/**
 	 * Adds the components necessary to the File ribbon in the main panel header
 	 * 
 	 * @param ribbonFile
 	 *            the File Ribbon
 	 */
 	private void addFileRibbonComponents(JPanel ribbonFile) {
+
 		// This is the Open Scenario Button inside of the file ribbon
 		JButton btnOpenScenario = new JButton("Open Scenario");
 		btnOpenScenario.addActionListener(new ActionListener() {
@@ -245,8 +277,8 @@ public class Editor {
 				openTheScenarioFile(btnOpenScenario);
 			}
 		});
-		btnOpenScenario.getAccessibleContext().setAccessibleDescription(
-				"lets you select a scenario file to play. Button 1 of 3");
+		btnOpenScenario.getAccessibleContext()
+				.setAccessibleDescription("lets you select a scenario file to play. Button 1 of 3");
 		btnOpenScenario.setToolTipText("Select a scenario file to open");
 		btnOpenScenario.setBackground(Color.ORANGE);
 		ribbonFile.add(btnOpenScenario);
@@ -324,7 +356,7 @@ public class Editor {
 		fc.setCurrentDirectory(new File(System.getProperty("user.home")));
 		int returnVal = fc.showOpenDialog(btn);
 
-		if (returnVal == fc.APPROVE_OPTION) {
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			openScenarioFile = fc.getSelectedFile();
 			createFileDisplayer(panelHeader, openScenarioFile);
 		}
@@ -341,18 +373,18 @@ public class Editor {
 	 */
 	private void createFileDisplayer(JPanel panelHeader, File file) {
 		// Remove existing file displayer first
-		panelHeader.remove(labelSelectedFile);
+		panelHeader.remove(fileDisplayerLabel);
 		// The JLabel to hold the selected file
-		labelSelectedFile.setText("Selected File:  '" + file.getName() + "'  ");
-		labelSelectedFile.setHorizontalAlignment(SwingConstants.RIGHT);
-		labelSelectedFile.setBounds(505, 0, 211, 26);
-		panelHeader.add(labelSelectedFile);
+		fileDisplayerLabel.setText("Selected File:  '" + file.getName() + "'  ");
+		fileDisplayerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		fileDisplayerLabel.setBounds(505, 0, 211, 26);
+		panelHeader.add(fileDisplayerLabel);
 		// The button that removes the current file chosen
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Remove the components
-				panelHeader.remove(labelSelectedFile);
+				panelHeader.remove(fileDisplayerLabel);
 				panelHeader.remove(btnRemove);
 				openScenarioFile = null;
 
@@ -362,8 +394,7 @@ public class Editor {
 		});
 
 		btnRemove.setToolTipText("Removes the currently selected file");
-		btnRemove.getAccessibleContext()
-				.setAccessibleDescription("removes the file that you just selected");
+		btnRemove.getAccessibleContext().setAccessibleDescription("removes the file that you just selected");
 		btnRemove.setBackground(Color.RED);
 		btnRemove.setForeground(Color.WHITE);
 		btnRemove.setBounds(715, 0, 80, 26);
@@ -397,17 +428,20 @@ public class Editor {
 					"Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
+
+		removeRibbon(ribbonFile);
+		removeRibbon(ribbonEdit);
+
 		// Initializes the editor through the scroll pane
-		scrollScenarioEditor.setBounds(0, 63, 794, 582);
+		scrollScenarioEditor.setBounds(0, 28, 794, 582);
 		scrollScenarioEditor.setBorder(null);
 		scrollScenarioEditor.getVerticalScrollBar().setUnitIncrement(25);
 		frame.getContentPane().add(scrollScenarioEditor);
-		
+
 		// The Panel Editor creates the panels
 		PanelEditor panelScenarioEditor = new PanelEditor(openScenarioFile);
 		scrollScenarioEditor.setViewportView(panelScenarioEditor);
-		
+
 		scrollScenarioEditor.revalidate();
 		scrollScenarioEditor.repaint();
 
@@ -474,6 +508,7 @@ public class Editor {
 	 * @throws FileNotFoundException
 	 */
 	private void scenarioFileValidator() throws FileNotFoundException {
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(openScenarioFile));
 
 		try {

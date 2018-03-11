@@ -17,7 +17,6 @@ import Editor.templates.KeyPhraseTemplate;
 public class PanelEditor extends JPanel {
 
 	public static List<Object> listTemplates = new ArrayList<Object>();
-	public static File scenarioFile;
 
 	public PanelEditor(File file) throws FileNotFoundException {
 		super();
@@ -25,7 +24,6 @@ public class PanelEditor extends JPanel {
 		
 		//scan scenario files and test if they load
 		Scanner scenario = new Scanner(file);
-		this.scenarioFile = file;
 		while (scenario.hasNextLine()) {
 			Object temp = new KeyPhraseTemplate(scenario.nextLine() +"\n");
 			listTemplates.add(temp);
