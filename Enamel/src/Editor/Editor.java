@@ -79,6 +79,9 @@ public class Editor {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		panelHeader.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		
+		// Make the scroll scenario Editors viewport to null (For edit button toggleability
+		scrollScenarioEditor.setViewport(null);
 
 		// This is the header panel that holds the buttons on top of the application
 		panelHeader.setBackground(Color.WHITE);
@@ -327,12 +330,19 @@ public class Editor {
 	 */
 	private void addEditRibbonComponents(JPanel ribbonEdit) {
 		JButton btnEditScenario = new JButton("Edit Scenario");
+		
+		// First check to see if the scroll scenario editor is open or not
+		// If it is open then make the edit button not clickable by creating
+		// the save panel again
+		if (scrollScenarioEditor.getViewport() != null) {
+			createSavePanel(btnEditScenario);
+		}
 
 		btnEditScenario.addActionListener(new ActionListener() {
 			// Clicking on the play scenario starts playing the file that was chosen
 			public void actionPerformed(ActionEvent e) {
 				try {
-					editScenario();
+					editScenario(btnEditScenario);
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
@@ -414,9 +424,13 @@ public class Editor {
 	/**
 	 * Generates all the templates when the edit scenario button is placed
 	 * 
+	 * @param btnEdit is just being passed through here so that the savePanel can
+	 * 			make it toggleable or not depending on whether or not a scenario is 
+	 * 			open
+	 * 
 	 * @throws FileNotFoundException
 	 */
-	private void editScenario() throws FileNotFoundException {
+	private void editScenario(JButton btnEditScenario) throws FileNotFoundException {
 		// If the user doesn't have a file chosen
 		if (openScenarioFile == null) {
 			String[] options = {"Open Scenario", "Cancel"};
@@ -456,8 +470,8 @@ public class Editor {
 		scrollScenarioEditor.revalidate();
 		scrollScenarioEditor.repaint();
 
-		// The save-cancel panel
-		createSavePanel();
+		// The save-cancel panel and the btnEdit is passed into the savePanel for toggleable purposes
+		createSavePanel(btnEditScenario);
 
 	}
 
@@ -465,7 +479,10 @@ public class Editor {
 	 * Creates the save - cancel panel which allows the user to save a scenario or
 	 * cancel whatever it is they are doing
 	 */
-	private void createSavePanel() {
+	private void createSavePanel(JButton btnEditScenario) {
+		
+		// Make the edit button unclickable when the editor is open
+		btnEditScenario.setEnabled(false);
 
 		panelSave.removeAll();
 		frame.remove(panelSave);
@@ -478,6 +495,7 @@ public class Editor {
 
 		// The Save Button
 		JButton btnSave = new JButton("Save");
+		btnSave.setToolTipText("Saves and updates the scenario file");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -489,12 +507,14 @@ public class Editor {
 
 		// The Cancel Button
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setToolTipText("Closes the scenario editor");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showConfirmDialog(frame,
 						"You have unsaved changes, are you sure you want to exit?", "Exiting scenario editor",
 						JOptionPane.YES_NO_OPTION);
 				if (response == JOptionPane.YES_OPTION) {
+					btnEditScenario.setEnabled(true); // Make the button clickable again
 					scrollScenarioEditor.setViewport(null);
 					panelSave.removeAll();
 					frame.remove(scrollScenarioEditor);
